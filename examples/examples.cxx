@@ -45,13 +45,3 @@ Window::operator GLFWwindow *() const
 {
     return window;
 }
-
-void Window::run(voidfuncptr callback)
-{
-    while (!glfwWindowShouldClose(window))
-    {
-        callback(window);
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-}
