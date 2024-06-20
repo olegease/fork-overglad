@@ -8,3 +8,4 @@ add_subdirectory(source)
 
 add_subdirectory(libs/glad)
 target_link_libraries(${SON8PROJECT} INTERFACE glad)
+target_include_directories(${SON8PROJECT} INTERFACE include)
