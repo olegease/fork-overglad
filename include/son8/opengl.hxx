@@ -79,8 +79,8 @@ namespace son8::opengl::enums
 #endif
 #ifdef SON8_OPENGL_VERSION_4_3
         Patches = GL_PATCHES,
-    };
 #endif
+    };
 }
 
 #  ifdef  SON8_OPENGL_INCLUDE
@@ -95,5 +95,3 @@ namespace son8::opengl::enums
 
 #endif//SON8_OPENGL_VERSION_4_6
 #  endif//SON8_OPENGL_INCLUDE
-
-
