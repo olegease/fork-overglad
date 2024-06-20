@@ -1,5 +1,5 @@
 #pragma once
-
+// because of draw arrays and elements
 # ifndef          SON8_OPENGL_DEFINED
 # define          SON8_OPENGL_DEFINED
 # define      SON8_OPENGL_VERSION_1_1
@@ -11,7 +11,7 @@
 
 namespace son8::opengl
 {
-    // Essential specification functions
+    // Core essential functions
     inline auto GetError() { auto e = glGetError(); assert(e != GL_NO_ERROR); return e; }
     inline void Viewport() { glViewport(0, 0, 640, 480); }
     inline void Viewport(GLsizei width, GLsizei height) { glViewport(0, 0, width, height); }
@@ -20,6 +20,29 @@ namespace son8::opengl
     inline void Finish() { glFinish(); }
 
     inline void Clear() { glClear(static_cast< GLbitfield >(enums::Clear::Allbit)); }
+    inline void Clear(enums::Clear maskbit) { glClear(static_cast< GLbitfield >(maskbit)); }
     inline void ClearColor() { glClearColor(0.0f, 0.0f, 0.0f, 0.0f); }
     inline void ClearColor(GLclampf rgb) { glClearColor(rgb, rgb, rgb, 0.0f); }
+    inline void ClearColor(GLclampf rgb, GLclampf alpha) { glClearColor(rgb, rgb, rgb, alpha); }
+    inline void ClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha) { glClearColor(red, green, blue, alpha); }
+    // vertex functions
+    inline void DrawArrays(GLsizei count) { glDrawArrays(static_cast< GLenum >(enums::Draw::Default), 0, count); }
+    inline void DrawArrays(enums::Draw mode, GLsizei count) { glDrawArrays(static_cast< GLenum >(mode), 0, count); }
+    // compatibility functions
+#ifndef  SON8_OPENGL_PROFILE_CORE
+    //   vertex functions
+    //     Array Pointers paradigm
+    inline void EnableClientState(enums::Array array) { glEnableClientState(static_cast< GLenum >(array)); }
+    inline void DisableClientState(enums::Array array) { glDisableClientState(static_cast< GLenum >(array)); }
+    //     Begin/End paradigm
+    inline void Begin() { glBegin(static_cast< GLenum >(enums::Draw::Default)); }
+    inline void Begin(enums::Draw mode) { glBegin(static_cast< GLenum >(mode)); }
+    inline void End() { glEnd(); }
+    inline void Vertex(types::array2s const &coords) { glVertex2sv(coords.data()); }
+    inline void Vertex(types::array2i const &coords) { glVertex2iv(coords.data()); }
+    inline void Vertex(types::array2f const &coords) { glVertex2fv(coords.data()); }
+    inline void Vertex(types::array2d const &coords) { glVertex2dv(coords.data()); }
+
+
+# endif//SON8_OPENGL_PROFILE_CORE
 }

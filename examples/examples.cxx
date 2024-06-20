@@ -15,16 +15,25 @@ Window::Window(uint32_t openglver)
     // profile on bits 0-7, core value is 0xCE, compatibility value is 0xCB, none vale is 0x00
     unsigned profile = openglver & 0xFF;
     unsigned hintProfile = GLFW_OPENGL_ANY_PROFILE;
+    std::string titleProfile = "Unknown";
     switch (profile) {
-        case 0xCE: hintProfile = GLFW_OPENGL_CORE_PROFILE; break;
-        case 0xCB: hintProfile = GLFW_OPENGL_COMPAT_PROFILE; break;
+        case 0xCE: hintProfile = GLFW_OPENGL_CORE_PROFILE; titleProfile = "Core"; break;
+        case 0xCB: hintProfile = GLFW_OPENGL_COMPAT_PROFILE; titleProfile = "Compatibility"; break;
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
     glfwWindowHint(GLFW_OPENGL_PROFILE, hintProfile);
 
-    window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
+    std::string title = "OPENGL ";
+    title += std::to_string(major);
+    title += ".";
+    title += std::to_string(minor);
+    title += " ";
+    title += titleProfile;
+    title += " Profile";
+
+    window = glfwCreateWindow(800, 600, title.c_str(), NULL, NULL);
     if (!window)
     {
         glfwTerminate();

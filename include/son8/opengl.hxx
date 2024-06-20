@@ -2,6 +2,7 @@
 
 #include <glad/gl.h>
 #include <cassert>
+#include <array>
 
 # ifndef          SON8_OPENGL_DEFINED
 # define          SON8_OPENGL_DEFINED
@@ -18,7 +19,10 @@
 
 namespace son8::opengl::types
 {
-
+    using array2i = std::array< GLint, 2 >;
+    using array2s = std::array< GLshort, 2 >;
+    using array2f = std::array< GLfloat, 2 >;
+    using array2d = std::array< GLdouble, 2 >;
 }
 
 namespace son8::opengl::enums
@@ -33,7 +37,7 @@ namespace son8::opengl::enums
         Accumbit = GL_ACCUM_BUFFER_BIT,
         Allbit = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_ACCUM_BUFFER_BIT,
 #endif
-    };
+    }; // enum class Clear
 
     enum class Error : GLenum {
         None = GL_NO_ERROR,
@@ -56,7 +60,7 @@ namespace son8::opengl::enums
 #ifdef SON8_OPENGL_VERSION_4_6
         Context = GL_CONTEXT_LOST,
 #endif
-    };
+    }; // enum class Error
 
     enum class Draw : GLenum {
         Default = GL_TRIANGLES,
@@ -80,8 +84,18 @@ namespace son8::opengl::enums
 #ifdef SON8_OPENGL_VERSION_4_3
         Patches = GL_PATCHES,
 #endif
+    }; // enum class Draw
+#ifndef  SON8_OPENGL_PROFILE_CORE
+    enum class Array : GLenum {
+        Vertex = GL_VERTEX_ARRAY,
+        Normal = GL_NORMAL_ARRAY,
+        Color = GL_COLOR_ARRAY,
+        Index = GL_INDEX_ARRAY,
+        Texture = GL_TEXTURE_COORD_ARRAY,
+        Edge = GL_EDGE_FLAG_ARRAY,
     };
-}
+# endif//SON8_OPENGL_PROFILE_CORE
+}// namespace son8::opengl::enums
 
 #  ifdef  SON8_OPENGL_INCLUDE
 #include    "opengl/v1_1.hxx"
