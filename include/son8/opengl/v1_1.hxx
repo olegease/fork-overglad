@@ -18,4 +18,8 @@ namespace son8::opengl
     inline void Viewport(GLint x, GLint y, GLsizei width, GLsizei height) { glViewport(x, y, width, height); }
     inline void Flush() { glFlush(); }
     inline void Finish() { glFinish(); }
+
+    inline void Clear() { glClear(static_cast< GLbitfield >(enums::Clear::Allbit)); }
+    inline void ClearColor() { glClearColor(0.0f, 0.0f, 0.0f, 0.0f); }
+    inline void ClearColor(GLclampf rgb) { glClearColor(rgb, rgb, rgb, 0.0f); }
 }
