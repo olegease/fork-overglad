@@ -17,3 +17,5 @@
 #  endif        //SON8_OPENGL_DEFINED
 
 #include "../opengl.hxx"
+
+/* LEAVE EMPTY AS OpenGL CompatiBility PROFILE DO NOT INTRODUCE NEW FEATURES */

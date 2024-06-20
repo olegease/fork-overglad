@@ -1,5 +1,5 @@
 #pragma once
-
+// because of shaders
 # ifndef          SON8_OPENGL_DEFINED
 # define          SON8_OPENGL_DEFINED
 # define      SON8_OPENGL_VERSION_1_1
