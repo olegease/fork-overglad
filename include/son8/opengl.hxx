@@ -1,5 +1,6 @@
 #pragma once
-
+// RULES:
+// - only call c language gl functions inside inlined functions definitions
 #include <glad/gl.h>
 #include <cassert>
 #include <array>
@@ -23,6 +24,16 @@ namespace son8::opengl::types
     using array2s = std::array< GLshort, 2 >;
     using array2f = std::array< GLfloat, 2 >;
     using array2d = std::array< GLdouble, 2 >;
+
+    struct Rect {
+        struct Point { GLint x; GLint y; };
+        struct Size { GLsizei w; GLsizei h; };
+        Point lXb;
+        Size wXh;
+        Rect() noexcept: lXb({0, 0}), wXh({640, 480}) { }
+        Rect(Rect::Size widthXHeight) noexcept: lXb({0, 0}), wXh(widthXHeight) { }
+        Rect(Rect::Point leftXbottom, Rect::Size widthXheight) noexcept: lXb(leftXbottom), wXh(widthXheight) { }
+    };
 }
 
 namespace son8::opengl::enums
@@ -51,7 +62,7 @@ namespace son8::opengl::enums
 #endif
 #ifndef SON8_OPENGL_PROFILE_CORE
     #ifdef SON8_OPENGL_VERSION_1_5
-        Table = GL_TABLE_TOO_LARGE
+        Table = GL_TABLE_TOO_LARGE,
     #endif
 #endif
 #ifdef SON8_OPENGL_VERSION_3_3
@@ -85,6 +96,28 @@ namespace son8::opengl::enums
         Patches = GL_PATCHES,
 #endif
     }; // enum class Draw
+
+    enum class Dir : GLenum {
+        Counter = GL_CCW,
+        Clockwise = GL_CW,
+    }; // enum class Dir
+
+    // enums used in glEnable/glDisable/IsEnabled functions
+    enum class Capability : GLenum {
+        Blend = GL_BLEND,
+        DepthTest = GL_DEPTH_TEST,
+    }; // enum class Capability
+    // enums used in glGet* functions
+    enum class GetBoolean : GLenum {
+        Doublebuffer = GL_DOUBLEBUFFER,
+    }; // enum class GetBoolean
+    enum class GetInteger : GLenum {
+        MaxDrawBuffers = GL_MAX_DRAW_BUFFERS,
+    }; // enum class GetInteger
+    enum class GetDouble : GLenum { // same as GetFloat
+        PointSize = GL_POINT_SIZE,
+    }; // enum class GetFloat
+
 #ifndef  SON8_OPENGL_PROFILE_CORE
     enum class Array : GLenum {
         Vertex = GL_VERTEX_ARRAY,

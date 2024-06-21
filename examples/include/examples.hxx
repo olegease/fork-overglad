@@ -2,25 +2,37 @@
 #include <GLFW/glfw3.h>
 
 #include <cstdint>
+#include <utility>
 
 struct Window
 {
-    using voidfuncptr = void(*)(GLFWwindow *window);
-    template< typename... Args >
-    using Callback = void(*)(Args...);
     GLFWwindow* window;
     Window(uint32_t openglver = 0x0406CE);
     ~Window();
 
     operator GLFWwindow*() const;
-    template< typename... Args >
-    void run(Callback< Args... > callback, Args&&... args)
+    template< typename Callback, typename... Args >
+    void run(Callback&& callback, Args&&... args)
     {
         while (!glfwWindowShouldClose(window))
         {
-            callback(args...);
+            callback(std::forward< Args >(args)...);
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
     }
 };
+
+struct OnetimeOnly {
+    bool once = true;
+    template< typename Callback, typename... Args >
+    void operator()(Callback&& callback, Args&&... args)
+    {
+        if (once)
+        {
+            callback(std::forward< Args >(args)...);
+            once = false;
+        }
+    }
+};
+

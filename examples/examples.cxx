@@ -33,7 +33,7 @@ Window::Window(uint32_t openglver)
     title += titleProfile;
     title += " Profile";
 
-    window = glfwCreateWindow(800, 600, title.c_str(), NULL, NULL);
+    window = glfwCreateWindow(640, 480, title.c_str(), NULL, NULL);
     if (!window)
     {
         glfwTerminate();
