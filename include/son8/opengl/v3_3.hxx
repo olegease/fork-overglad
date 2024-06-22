@@ -17,5 +17,7 @@
 
 namespace son8::opengl
 {
-
+    // glEnablei/glDisablei no i as cxx can overload it unlike c
+    inline void Enable(enums::Capability cap, GLuint index) { glEnablei(static_cast< GLenum >(cap), index); assert(glGetError() != GL_INVALID_VALUE); }
+    inline void Disable(enums::Capability cap, GLuint index) { glDisablei(static_cast< GLenum >(cap), index); assert(glGetError() != GL_INVALID_VALUE); }
 }
