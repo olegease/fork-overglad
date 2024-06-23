@@ -143,8 +143,11 @@ namespace son8::opengl::enums
     enum class Shader : GLenum {
         Vertex = GL_VERTEX_SHADER,
         Fragment = GL_FRAGMENT_SHADER,
+    #ifdef SON8_OPENGL_VERSION_3_3
+        Geometry = GL_GEOMETRY_SHADER,
+    #endif
     };
-#endif
+#endif//SON8_OPENGL_VERSION_2_1
 
 #ifdef SON8_OPENGL_VERSION_4_6
     enum class Reset : GLenum {
@@ -183,6 +186,9 @@ namespace son8::opengl {
     // BufferStorage NamedBufferStorage
     // ClearNamedBufferSubData ClearNamedBufferData
     // MapNamedBufferRange MapNamedBuffer FlushMappedNamedBufferRange UnmapNamedBuffer CopyNamedBufferSubData
+    // shader functions
+    // SpecializeShader
+    // MemoryBarrierByRegion
 }// namespace son8::opengl
 #endif//SON8_OPENGL_VERSION_4_6
 #  endif//SON8_OPENGL_INCLUDE

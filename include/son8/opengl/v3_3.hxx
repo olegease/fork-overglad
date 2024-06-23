@@ -30,6 +30,14 @@ namespace son8::opengl
     // InvalidateBufferSubData InvalidateBufferData
     // CopyBufferSubData
     // GenVertexArrays DeleteVertexArrays BindVertexArray
+    // shader functions
+    // UniformBlockBinding
+    // TransformFeedbackVaryings
+    // thread functions
+    // BeginQuery EndQuery GenQueries DeleteQueries
+    // Begin/EndConditionalRender
+    // Begin/EndTransformFeedback
+    // ProvokingVertex
     // glEnablei/glDisablei no i as cxx can overload it unlike c
     inline void Enable(enums::Capability cap, GLuint index) { glEnablei(static_cast< GLenum >(cap), index); assert(glGetError() != GL_INVALID_VALUE); }
     inline void Disable(enums::Capability cap, GLuint index) { glDisablei(static_cast< GLenum >(cap), index); assert(glGetError() != GL_INVALID_VALUE); }

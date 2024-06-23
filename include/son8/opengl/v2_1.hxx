@@ -29,7 +29,6 @@ namespace son8::opengl
     inline void UseProgram(types::Program program) { glUseProgram(program); }
     inline void DeleteProgram(types::Program program) { glDeleteProgram(program); }
     inline void ValidateProgram(types::Program program) { glValidateProgram(program); }
-    // GetActiveAttrib GetAttribLocation BindAttribLocation
-    // GetUniformLocation GetActiveUniform
+    // BindAttribLocation
     // Uniform* UniformMatrix*
 }
