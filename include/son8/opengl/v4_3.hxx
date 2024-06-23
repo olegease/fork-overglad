@@ -19,5 +19,13 @@
 
 namespace son8::opengl
 {
-
+    // FenceSync DeleteSync
+    // ClientWaitSync WaitSync
+    // GetSynciv/IsSync
+    // GenQueries DeleteQueries
+    // BeginQueryIndexed BeginQuery EndQueryIndexed EndQuery IsQuery
+    // GetQueryIndexediv GetQueryiv GetQurtyObjectiv*
+    // QueryCounter
+    // buffer functions
+    // ClearBufferSubData ClearBufferData
 }

@@ -18,10 +18,10 @@ namespace son8::opengl
     // MultiDrawElements
     // DrawRangeElements
     // buffer functions
+    // GenBuffers
+    // DeleteBuffers
     inline void BindBuffer(GLuint buffer) { glBindBuffer(static_cast< GLenum >(enums::Buffer::Array), buffer); }
     inline void BindBuffer(enums::Buffer target, GLuint buffer) { glBindBuffer(static_cast< GLenum >(target), buffer); }
-    // DeleteBuffers
-    // GenBuffers
     // BufferData
     // BufferSubData
     // MapBuffer
@@ -49,7 +49,7 @@ namespace son8::opengl
     // MultiTexCoord, FogCoord, SecondaryColor
     // ClientActiveTexture
     // LoadTransposeMatrix MultTransposeMatrix
-    // RasterPos WindowPos
+    // WindowPos
     // arb imaging
     // ColorTable ColorTableParamete CopyColorTable ColorSubTable CopyColorSubTable
     // ConvolutionFilter2D/1D ConvolutionParameter CopyConvolutionFilter2D/1D

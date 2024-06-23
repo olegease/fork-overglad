@@ -38,14 +38,14 @@ namespace son8::opengl::types
     class Program {
         GLuint index;
     public:
-        Program(GLuint id) noexcept: index(id) { }
+        explicit Program(GLuint id) noexcept: index(id) { }
         operator GLuint() { return index; }
     };
 
     class Shader {
         GLuint index;
     public:
-        Shader(GLuint id) noexcept: index(id) { }
+        explicit Shader(GLuint id) noexcept: index(id) { }
         operator GLuint() { return index; }
     };
 }
@@ -146,6 +146,15 @@ namespace son8::opengl::enums
     };
 #endif
 
+#ifdef SON8_OPENGL_VERSION_4_6
+    enum class Reset : GLenum {
+        None = GL_NO_ERROR,
+        Guilty = GL_GUILTY_CONTEXT_RESET,
+        Innocent = GL_INNOCENT_CONTEXT_RESET,
+        Unknown = GL_UNKNOWN_CONTEXT_RESET,
+    };
+#endif
+
 #ifndef  SON8_OPENGL_PROFILE_CORE
     enum class Array : GLenum {
         Vertex = GL_VERTEX_ARRAY,
@@ -167,6 +176,13 @@ namespace son8::opengl::enums
 
 // opengl 4.4, 4.5 and 4.6 functionality
 # ifdef SON8_OPENGL_VERSION_4_6 // !important: if client include v4_6cb.hxx
-
+namespace son8::opengl {
+    inline auto GetGraphicsResetStatus() { return static_cast< enums::Reset >(glGetGraphicsResetStatus()); }
+    // CreateQueries
+    // GetQueryBufferObjectiv*
+    // BufferStorage NamedBufferStorage
+    // ClearNamedBufferSubData ClearNamedBufferData
+    // MapNamedBufferRange MapNamedBuffer FlushMappedNamedBufferRange UnmapNamedBuffer CopyNamedBufferSubData
+}// namespace son8::opengl
 #endif//SON8_OPENGL_VERSION_4_6
 #  endif//SON8_OPENGL_INCLUDE

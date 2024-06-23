@@ -17,8 +17,10 @@ namespace son8::opengl
 {
     // shader functions
     // VertexAttrib...
+    // VertexAttribPointer
     // Enable/DisableVertexAttribArray
     inline auto CreateShader(enums::Shader type) { return types::Shader{glCreateShader(static_cast< GLenum >(type))}; }
+    inline void DeleteShader(types::Shader shader) { glDeleteShader(shader); }
     // ShaderSource, CompileShader, DeleteShader
     inline auto CreateProgram() { return types::Program{glCreateProgram()}; }
     inline void AttachShader(types::Program program, types::Shader shader) { glAttachShader(program, shader); }
