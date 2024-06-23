@@ -34,6 +34,20 @@ namespace son8::opengl::types
         Rect(Rect::Size widthXHeight) noexcept: lXb({0, 0}), wXh(widthXHeight) { }
         Rect(Rect::Point leftXbottom, Rect::Size widthXheight) noexcept: lXb(leftXbottom), wXh(widthXheight) { }
     };
+
+    class Program {
+        GLuint index;
+    public:
+        Program(GLuint id) noexcept: index(id) { }
+        operator GLuint() { return index; }
+    };
+
+    class Shader {
+        GLuint index;
+    public:
+        Shader(GLuint id) noexcept: index(id) { }
+        operator GLuint() { return index; }
+    };
 }
 
 namespace son8::opengl::enums
@@ -117,6 +131,20 @@ namespace son8::opengl::enums
     enum class GetDouble : GLenum { // same as GetFloat
         PointSize = GL_POINT_SIZE,
     }; // enum class GetFloat
+
+#ifdef  SON8_OPENGL_VERSION_1_5
+    enum class Buffer : GLenum {
+        Array = GL_ARRAY_BUFFER,
+        Element = GL_ELEMENT_ARRAY_BUFFER,
+    };
+#endif//SON8_OPENGL_VERSION_1_5
+
+#ifdef SON8_OPENGL_VERSION_2_1
+    enum class Shader : GLenum {
+        Vertex = GL_VERTEX_SHADER,
+        Fragment = GL_FRAGMENT_SHADER,
+    };
+#endif
 
 #ifndef  SON8_OPENGL_PROFILE_CORE
     enum class Array : GLenum {

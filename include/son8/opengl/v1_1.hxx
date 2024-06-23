@@ -117,7 +117,8 @@ namespace son8::opengl
     // CopyPixels
     // special functions
     // Map1,2, EvalCoord, MapGrid, EvalMesh, EvalPoint
-    // InitNames, LoadName, PushName, PopName, RenderMode, SelectBuffer, FeedbackBuffer, PassThrough
+    // InitNames, LoadName, PushName, PopName
+    // RenderMode, SelectBuffer, FeedbackBuffer, PassThrough
     // NewList, EndList, CallList, CallLists, ListBase, GenLists, IsList, DeleteLists
     // GetClipPlane, GetLight and other deprecated Get functions
     // GetPolygonStipple
