@@ -15,4 +15,6 @@ include_directories(include)
 add_library(examples examples.cxx)
 link_libraries(examples)
 add_executable(overglad_example window/example.cxx)
+add_executable(overglad-test opengl/test.cxx)
 add_executable(overglad-enable_index_assert opengl/enable_index_assert.cxx)
+
