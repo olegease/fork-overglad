@@ -13,5 +13,50 @@
 
 namespace son8::opengl
 {
+    // vertex functions
+    // MultiDrawArrays
+    // MultiDrawElements
+    // DrawRangeElements
+    // buffer functions
+    // GenBuffers
+    // DeleteBuffers
+    inline void BindBuffer(GLuint buffer) { glBindBuffer(static_cast< GLenum >(enums::Buffer::Array), buffer); }
+    inline void BindBuffer(enums::Buffer target, GLuint buffer) { glBindBuffer(static_cast< GLenum >(target), buffer); }
+    // BufferData
+    // BufferSubData
+    // MapBuffer
+    // UnmapBuffer
+    // texture functions
+    // ActiveTexture
+    // PointParameter
+    // PolygonMode
+    // PolygonOffset
+    // TexImage3D TexSubImage3D CopyTexSubImage3D
+    // CompressedTexImage1D/2D/3D
+    // CompressedTexSubImage1D/2D/3D
+    // framebuffer functions
+    // SampleCoverage
+    // BeginQuery
+    // EndQuery
+    // GenQueries
+    // DeleteQueries
+    // BlendEquation
+    // BlendFuncSeparate
+    // BlendColor
 
+// compatibility functions
+#ifndef SON8_OPENGL_PROFILE_CORE
+    // SecondaryColorPointer FogCoordPointer
+    // MultiTexCoord, FogCoord, SecondaryColor
+    // ClientActiveTexture
+    // LoadTransposeMatrix MultTransposeMatrix
+    // WindowPos
+    // arb imaging
+    // ColorTable ColorTableParameter CopyColorTable ColorSubTable CopyColorSubTable
+    // ConvolutionFilter2D/1D ConvolutionParameter CopyConvolutionFilter2D/1D
+    // SeparableFilter2D/1D
+    // Histogram Minmax
+    // ConvolutionParameter
+
+#endif//SON8_OPENGL_PROFILE_CORE
 }

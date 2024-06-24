@@ -17,6 +17,48 @@
 
 namespace son8::opengl
 {
+    // VertexAttribDivisor
+    // PrimitiveRestartIndex
+    // DrawArraysOneInstance/d
+    // DrawElementsOneInstance/d
+    // DrawElementsBaseVertex,DrawRangeElementsBaseVertex,DrawElementsInstancedBaseVertex
+    // MultiDrawElementsBaseVertex
+    // buffer functions
+    // BindBufferRange BindBufferBase
+    // MapBufferRange
+    // FlushMappedBufferRange
+    // InvalidateBufferSubData InvalidateBufferData
+    // CopyBufferSubData
+    // GenVertexArrays DeleteVertexArrays BindVertexArray
+    // shader functions
+    // UniformBlockBinding
+    // TransformFeedbackVaryings
+    // ???
+    // Begin/EndConditionalRender
+    // Begin/EndTransformFeedback
+    // ProvokingVertex
+    // GenSamplers DeleteSamplers BindSampler
+    // SamplerParameter/SamplerParameterI
+    // TexImage2DMultisample TexImage3DMultisample
+    // TexBuffer
+    // TexParameterI
+    // GenerateMipmap
+    // BindFragDataLocationIndexed BindFragDataLocation
+    // SampleMaski ColorMaski
+    // ClearBuffer ClearBufferfi
+    // ClampColor
+    // BlitFramebuffer
+    // GenFramebuffers DeleteFramebuffers BindFramebuffer
+    // GenRenderbuffers DeleteRenderbuffers BindRenderbuffer
+    // RenderbufferStorageMultisample RenderbufferStorage
+    // FramebufferRenderbuffer FramebufferTexture
+    // FramebufferTexture1D/2D/3D
+    // FramebufferTextureLayer
+    // CheckFramebufferStatus
+    // QueryCounter
+    // FenceSync DeleteSync
+    // ClientWaitSync WaitSync
+    // BeginQueryIndexed EndQueryIndexed
     // glEnablei/glDisablei no i as cxx can overload it unlike c
     inline void Enable(enums::Capability cap, GLuint index) { glEnablei(static_cast< GLenum >(cap), index); assert(glGetError() != GL_INVALID_VALUE); }
     inline void Disable(enums::Capability cap, GLuint index) { glDisablei(static_cast< GLenum >(cap), index); assert(glGetError() != GL_INVALID_VALUE); }

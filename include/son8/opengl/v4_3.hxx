@@ -19,5 +19,26 @@
 
 namespace son8::opengl
 {
-
+    // buffer functions
+    // ClearBufferSubData ClearBufferData
+    // shader functions
+    inline void ReleaseShaderCompiler() { glReleaseShaderCompiler(); }
+    // ShaderBinary
+    // ProgramParameteri
+    // CreateShaderProgramv
+    // GenProgramPipelines DeleteProgramPipelines BindProgramPipeline
+    // UseProgramStages
+    // ActiveShaderProgram
+    // ProgramBinary
+    // ProgramUniform ProgramUniformMatrix
+    // ShaderStorageBlockBinding
+    // UniformSubroutinesuiv
+    // thread functions
+    // MemoryBarrier
+    // TexBufferRange
+    // TextureView
+    // TexStorage1D/2D/3D
+    // TexStorage2DMultisample/TexStorage3DMultisample
+    // InvalidateTexSubImage InvalidateTexImage
+    // FramebufferParameteri
 }

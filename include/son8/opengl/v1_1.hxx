@@ -36,11 +36,11 @@ namespace son8::opengl
     // texture functions
     // TexImage2D,1D
     // CopyTexImage2D,1D
-    // TexSubImage1D,2D,Copy1D,Copy2D
+    // TexSubImage1D/2D,CopyTexSubImage1D/2D
     // TexParameter
     // GenTextures
-    // BindTexture
     // DeleteTextures
+    // BindTexture
     // framebuffer functions
     inline void Scissor(GLint left, GLint bottom, GLsizei width, GLsizei height) { glScissor(left, bottom, width, height); }
     // StencilFunc
@@ -66,7 +66,9 @@ namespace son8::opengl
     inline auto IsEnabled(enums::Capability cap) -> bool { return glIsEnabled(static_cast< GLenum >(cap)); }
     inline auto Get(enums::GetBoolean name) { GLboolean v; glGetBooleanv(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetInteger name) { GLint v; glGetIntegerv(static_cast< GLenum >(name), &v); return v; }
+    // inline auto Get(enums::GetFloat name) { GLfloat v; glGetFloatv(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetDouble name) { GLdouble v; glGetDoublev(static_cast< GLenum >(name), &v); return v; }
+    inline auto Get(enums::GetArray4d name) { types::array4d v; glGetDoublev(static_cast< GLenum >(name), v.data()); return v; }
     // GetTexImage
     // IsTexture
     // GetPointerv
@@ -117,7 +119,8 @@ namespace son8::opengl
     // CopyPixels
     // special functions
     // Map1,2, EvalCoord, MapGrid, EvalMesh, EvalPoint
-    // InitNames, LoadName, PushName, PopName, RenderMode, SelectBuffer, FeedbackBuffer, PassThrough
+    // InitNames, LoadName, PushName, PopName
+    // RenderMode, SelectBuffer, FeedbackBuffer, PassThrough
     // NewList, EndList, CallList, CallLists, ListBase, GenLists, IsList, DeleteLists
     // GetClipPlane, GetLight and other deprecated Get functions
     // GetPolygonStipple

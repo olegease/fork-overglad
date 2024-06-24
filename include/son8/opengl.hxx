@@ -4,6 +4,7 @@
 #include <glad/gl.h>
 #include <cassert>
 #include <array>
+#include <vector>
 
 # ifndef          SON8_OPENGL_DEFINED
 # define          SON8_OPENGL_DEFINED
@@ -20,10 +21,22 @@
 
 namespace son8::opengl::types
 {
+    template< unsigned id >
+    class GenTid {
+        std::vector< GLuint > ids;
+    public:
+        explicit GetTid(GLuint num = 1) { ids.reserve(num); }
+    };
+
+    using List = GenTid< 1 >;
+    using Buffer = GenTid< 2 >;
+
     using array2i = std::array< GLint, 2 >;
     using array2s = std::array< GLshort, 2 >;
     using array2f = std::array< GLfloat, 2 >;
     using array2d = std::array< GLdouble, 2 >;
+
+    using array4d = std::array< GLdouble, 4 >;
 
     struct Rect {
         struct Point { GLint x; GLint y; };
@@ -33,6 +46,20 @@ namespace son8::opengl::types
         Rect() noexcept: lXb({0, 0}), wXh({640, 480}) { }
         Rect(Rect::Size widthXHeight) noexcept: lXb({0, 0}), wXh(widthXHeight) { }
         Rect(Rect::Point leftXbottom, Rect::Size widthXheight) noexcept: lXb(leftXbottom), wXh(widthXheight) { }
+    };
+
+    class Program {
+        GLuint index;
+    public:
+        explicit Program(GLuint id) noexcept: index(id) { }
+        operator GLuint() { return index; }
+    };
+
+    class Shader {
+        GLuint index;
+    public:
+        explicit Shader(GLuint id) noexcept: index(id) { }
+        operator GLuint() { return index; }
     };
 }
 
@@ -118,6 +145,38 @@ namespace son8::opengl::enums
         PointSize = GL_POINT_SIZE,
     }; // enum class GetFloat
 
+    enum class GetArray4d : GLenum {
+#ifndef SON8_OPENGL_PROFILE_CORE
+        AccumClearValue = GL_ACCUM_CLEAR_VALUE,
+#endif
+    };
+
+#ifdef  SON8_OPENGL_VERSION_1_5
+    enum class Buffer : GLenum {
+        Array = GL_ARRAY_BUFFER,
+        Element = GL_ELEMENT_ARRAY_BUFFER,
+    };
+#endif//SON8_OPENGL_VERSION_1_5
+
+#ifdef SON8_OPENGL_VERSION_2_1
+    enum class Shader : GLenum {
+        Vertex = GL_VERTEX_SHADER,
+        Fragment = GL_FRAGMENT_SHADER,
+    #ifdef SON8_OPENGL_VERSION_3_3
+        Geometry = GL_GEOMETRY_SHADER,
+    #endif
+    };
+#endif//SON8_OPENGL_VERSION_2_1
+
+#ifdef SON8_OPENGL_VERSION_4_6
+    enum class Reset : GLenum {
+        None = GL_NO_ERROR,
+        Guilty = GL_GUILTY_CONTEXT_RESET,
+        Innocent = GL_INNOCENT_CONTEXT_RESET,
+        Unknown = GL_UNKNOWN_CONTEXT_RESET,
+    };
+#endif
+
 #ifndef  SON8_OPENGL_PROFILE_CORE
     enum class Array : GLenum {
         Vertex = GL_VERTEX_ARRAY,
@@ -139,6 +198,36 @@ namespace son8::opengl::enums
 
 // opengl 4.4, 4.5 and 4.6 functionality
 # ifdef SON8_OPENGL_VERSION_4_6 // !important: if client include v4_6cb.hxx
-
+namespace son8::opengl {
+    inline auto GetGraphicsResetStatus() { return static_cast< enums::Reset >(glGetGraphicsResetStatus()); }
+    // CreateQueries
+    // GetQueryBufferObjectiv*
+    // BufferStorage NamedBufferStorage
+    // ClearNamedBufferSubData ClearNamedBufferData
+    // MapNamedBufferRange MapNamedBuffer FlushMappedNamedBufferRange UnmapNamedBuffer CopyNamedBufferSubData
+    // shader functions
+    // SpecializeShader
+    // MemoryBarrierByRegion
+    // CreateTextures
+    // BindImageTexture
+    // TextureSubImage3D/2D/1D
+    // CopyTextureSubImage3D/2D/1D
+    // CompressedTextureSubImage1D/2D/3D
+    // TextureBufferRange TextureBuffer
+    // TextureParameter/I
+    // GenerateTextureMipmap
+    // TextureStorage1D/2/3D
+    // TextureStorage2D/3DMultisample
+    // ClearTexSubImage ClearTexImage
+    // BindImageTextures
+    // CreateFramebuffers
+    // NamedFramebufferParameteri
+    // CreateRenderbuffers
+    // NamedRenderbufferStorageMultisample NamedRanderbufferStorage
+    // NamedFramebufferRenderbuffer
+    // NamedFramebufferTexture NamedFramebufferTextureLayer
+    // TextureBarrier
+    // CheckNamedFramebufferStatus
+}// namespace son8::opengl
 #endif//SON8_OPENGL_VERSION_4_6
 #  endif//SON8_OPENGL_INCLUDE
