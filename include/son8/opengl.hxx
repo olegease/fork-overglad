@@ -36,6 +36,8 @@ namespace son8::opengl::types
     using array2f = std::array< GLfloat, 2 >;
     using array2d = std::array< GLdouble, 2 >;
 
+    using array4d = std::array< GLdouble, 4 >;
+
     struct Rect {
         struct Point { GLint x; GLint y; };
         struct Size { GLsizei w; GLsizei h; };
@@ -142,6 +144,12 @@ namespace son8::opengl::enums
     enum class GetDouble : GLenum { // same as GetFloat
         PointSize = GL_POINT_SIZE,
     }; // enum class GetFloat
+
+    enum class GetArray4d : GLenum {
+#ifndef SON8_OPENGL_PROFILE_CORE
+        AccumClearValue = GL_ACCUM_CLEAR_VALUE,
+#endif
+    };
 
 #ifdef  SON8_OPENGL_VERSION_1_5
     enum class Buffer : GLenum {
