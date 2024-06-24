@@ -25,7 +25,7 @@ namespace son8::opengl::types
     class GenTid {
         std::vector< GLuint > ids;
     public:
-        explicit GetTid(GLuint num = 1) { ids.reserve(num); }
+        explicit GenTid(GLuint num = 1) { ids.reserve(num); }
     };
 
     using List = GenTid< 1 >;
