@@ -4,6 +4,7 @@
 #include <glad/gl.h>
 #include <cassert>
 #include <array>
+#include <vector>
 
 # ifndef          SON8_OPENGL_DEFINED
 # define          SON8_OPENGL_DEFINED
@@ -20,6 +21,16 @@
 
 namespace son8::opengl::types
 {
+    template< unsigned id >
+    class GenTid {
+        std::vector< GLuint > ids;
+    public:
+        explicit GetTid(GLuint num = 1) { ids.reserve(num); }
+    };
+
+    using List = GenTid< 1 >;
+    using Buffer = GenTid< 2 >;
+
     using array2i = std::array< GLint, 2 >;
     using array2s = std::array< GLshort, 2 >;
     using array2f = std::array< GLfloat, 2 >;
@@ -189,6 +200,26 @@ namespace son8::opengl {
     // shader functions
     // SpecializeShader
     // MemoryBarrierByRegion
+    // CreateTextures
+    // BindImageTexture
+    // TextureSubImage3D/2D/1D
+    // CopyTextureSubImage3D/2D/1D
+    // CompressedTextureSubImage1D/2D/3D
+    // TextureBufferRange TextureBuffer
+    // TextureParameter/I
+    // GenerateTextureMipmap
+    // TextureStorage1D/2/3D
+    // TextureStorage2D/3DMultisample
+    // ClearTexSubImage ClearTexImage
+    // BindImageTextures
+    // CreateFramebuffers
+    // NamedFramebufferParameteri
+    // CreateRenderbuffers
+    // NamedRenderbufferStorageMultisample NamedRanderbufferStorage
+    // NamedFramebufferRenderbuffer
+    // NamedFramebufferTexture NamedFramebufferTextureLayer
+    // TextureBarrier
+    // CheckNamedFramebufferStatus
 }// namespace son8::opengl
 #endif//SON8_OPENGL_VERSION_4_6
 #  endif//SON8_OPENGL_INCLUDE

@@ -36,11 +36,11 @@ namespace son8::opengl
     // texture functions
     // TexImage2D,1D
     // CopyTexImage2D,1D
-    // TexSubImage1D,2D,Copy1D,Copy2D
+    // TexSubImage1D/2D,CopyTexSubImage1D/2D
     // TexParameter
     // GenTextures
-    // BindTexture
     // DeleteTextures
+    // BindTexture
     // framebuffer functions
     inline void Scissor(GLint left, GLint bottom, GLsizei width, GLsizei height) { glScissor(left, bottom, width, height); }
     // StencilFunc

@@ -31,8 +31,9 @@ namespace son8::opengl
     // PointParameter
     // PolygonMode
     // PolygonOffset
-    // TexImage3D and other sub
+    // TexImage3D TexSubImage3D CopyTexSubImage3D
     // CompressedTexImage1D/2D/3D
+    // CompressedTexSubImage1D/2D/3D
     // framebuffer functions
     // SampleCoverage
     // BeginQuery
@@ -51,10 +52,11 @@ namespace son8::opengl
     // LoadTransposeMatrix MultTransposeMatrix
     // WindowPos
     // arb imaging
-    // ColorTable ColorTableParamete CopyColorTable ColorSubTable CopyColorSubTable
+    // ColorTable ColorTableParameter CopyColorTable ColorSubTable CopyColorSubTable
     // ConvolutionFilter2D/1D ConvolutionParameter CopyConvolutionFilter2D/1D
     // SeparableFilter2D/1D
     // Histogram Minmax
+    // ConvolutionParameter
 
 #endif//SON8_OPENGL_PROFILE_CORE
 }

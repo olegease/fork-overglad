@@ -19,12 +19,6 @@
 
 namespace son8::opengl
 {
-    // FenceSync DeleteSync
-    // ClientWaitSync WaitSync
-    // GetSynciv/IsSync
-    // BeginQueryIndexed EndQueryIndexed
-    // GetQueryIndexediv GetQueryiv GetQurtyObjectiv*
-    // QueryCounter
     // buffer functions
     // ClearBufferSubData ClearBufferData
     // shader functions
@@ -41,4 +35,10 @@ namespace son8::opengl
     // UniformSubroutinesuiv
     // thread functions
     // MemoryBarrier
+    // TexBufferRange
+    // TextureView
+    // TexStorage1D/2D/3D
+    // TexStorage2DMultisample/TexStorage3DMultisample
+    // InvalidateTexSubImage InvalidateTexImage
+    // FramebufferParameteri
 }

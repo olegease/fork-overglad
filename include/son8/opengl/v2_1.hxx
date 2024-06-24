@@ -15,6 +15,9 @@
 
 namespace son8::opengl
 {
+    // StencilFuncSeparate
+    // StencilOpSeparate
+    // DrawBuffers
     // shader functions
     // VertexAttrib...
     // VertexAttribPointer
