@@ -137,13 +137,47 @@ namespace son8::opengl::enums
     // enums used in glGet* functions
     enum class GetBoolean : GLenum {
         Doublebuffer = GL_DOUBLEBUFFER,
+#ifndef SON8_OPENGL_PROFILE_CORE
+        AlphaTest = GL_ALPHA_TEST,
+        AutoNormal = GL_AUTO_NORMAL,
+#endif
     }; // enum class GetBoolean
     enum class GetInteger : GLenum {
         MaxDrawBuffers = GL_MAX_DRAW_BUFFERS,
+#ifdef SON8_OPENGL_VERSION_1_5
+        ActiveTexture = GL_ACTIVE_TEXTURE,
+        ArrayBufferBinding = GL_ARRAY_BUFFER_BINDING,
+#endif
+#ifndef SON8_OPENGL_PROFILE_CORE
+        AccumAlphaBits = GL_ACCUM_ALPHA_BITS,
+        AccumBlueBits = GL_ACCUM_BLUE_BITS,
+        AccumGreenBits = GL_ACCUM_GREEN_BITS,
+        AccumRedBits = GL_ACCUM_RED_BITS,
+        AlphaBits = GL_ALPHA_BITS,
+        AlphaTestFunc = GL_ALPHA_TEST_FUNC,
+        AlphaTestRef = GL_ALPHA_TEST_REF,
+        AttribStackDepth = GL_ATTRIB_STACK_DEPTH,
+        AuxBuffers = GL_AUX_BUFFERS,
+#endif
     }; // enum class GetInteger
     enum class GetDouble : GLenum { // same as GetFloat
         PointSize = GL_POINT_SIZE,
-    }; // enum class GetFloat
+#ifndef SON8_OPENGL_PROFILE_CORE
+        AlphaBias = GL_ALPHA_BIAS,
+        AlphaScale = GL_ALPHA_SCALE,
+#endif
+    }; // enum class GetFloat/GetDouble
+
+    enum class GetArray2d : GLenum {
+#ifdef SON8_OPENGL_VERSION_1_5
+        AliasedLineWidthRange = GL_ALIASED_LINE_WIDTH_RANGE,
+#endif
+#ifndef SON8_OPENGL_PROFILE_CORE
+    #ifdef SON8_OPENGL_VERSION_1_5
+        AliasedPointSizeRange = GL_ALIASED_POINT_SIZE_RANGE,
+    #endif
+#endif
+    }; // enum class GetArray2d
 
     enum class GetArray4d : GLenum {
 #ifndef SON8_OPENGL_PROFILE_CORE

@@ -68,6 +68,7 @@ namespace son8::opengl
     inline auto Get(enums::GetInteger name) { GLint v; glGetIntegerv(static_cast< GLenum >(name), &v); return v; }
     // inline auto Get(enums::GetFloat name) { GLfloat v; glGetFloatv(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetDouble name) { GLdouble v; glGetDoublev(static_cast< GLenum >(name), &v); return v; }
+    inline auto Get(enums::GetArray2d name) { types::array2d v; glGetDoublev(static_cast< GLenum >(name), v.data()); return v; }
     inline auto Get(enums::GetArray4d name) { types::array4d v; glGetDoublev(static_cast< GLenum >(name), v.data()); return v; }
     // GetTexImage
     // IsTexture
