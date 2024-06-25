@@ -69,6 +69,7 @@ namespace son8::opengl
     // inline auto Get(enums::GetFloat name) { GLfloat v; glGetFloatv(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetDouble name) { GLdouble v; glGetDoublev(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetArray2d name) { types::array2d v; glGetDoublev(static_cast< GLenum >(name), v.data()); return v; }
+    inline auto Get(enums::GetArray4b name) { types::array4b v; glGetBooleanv(static_cast< GLenum >(name), v.data()); return v; }
     inline auto Get(enums::GetArray4d name) { types::array4d v; glGetDoublev(static_cast< GLenum >(name), v.data()); return v; }
     // GetTexImage
     // IsTexture
@@ -123,8 +124,6 @@ namespace son8::opengl
     // InitNames, LoadName, PushName, PopName
     // RenderMode, SelectBuffer, FeedbackBuffer, PassThrough
     // NewList, EndList, CallList, CallLists, ListBase, GenLists, IsList, DeleteLists
-    // GetClipPlane, GetLight and other deprecated Get functions
-    // GetPolygonStipple
     // PushAttrib...
     // material functions
     // LightModel, Light, Material, ColorMaterial, ShadeModel

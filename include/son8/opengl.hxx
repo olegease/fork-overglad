@@ -36,7 +36,10 @@ namespace son8::opengl::types
     using array2f = std::array< GLfloat, 2 >;
     using array2d = std::array< GLdouble, 2 >;
 
+    using array4b = std::array< GLboolean, 4 >;
     using array4d = std::array< GLdouble, 4 >;
+
+    using array16d = std::array< GLdouble, 16 >;
 
     struct Rect {
         struct Point { GLint x; GLint y; };
@@ -134,19 +137,49 @@ namespace son8::opengl::enums
         Blend = GL_BLEND,
         DepthTest = GL_DEPTH_TEST,
     }; // enum class Capability
+
     // enums used in glGet* functions
+    enum class GetUnknown : GLenum {
+#ifdef SON8_OPENGL_VERSION_1_5
+        CompressedTextureFormats = GL_COMPRESSED_TEXTURE_FORMATS,
+#endif
+    };
+
     enum class GetBoolean : GLenum {
+        ColorLogicOp = GL_COLOR_LOGIC_OP,
         Doublebuffer = GL_DOUBLEBUFFER,
 #ifndef SON8_OPENGL_PROFILE_CORE
         AlphaTest = GL_ALPHA_TEST,
         AutoNormal = GL_AUTO_NORMAL,
+        ClipPlane0 = GL_CLIP_PLANE0,
+        ClipPlane1 = GL_CLIP_PLANE1,
+        ClipPlane2 = GL_CLIP_PLANE2,
+        ClipPlane3 = GL_CLIP_PLANE3,
+        ClipPlane4 = GL_CLIP_PLANE4,
+        ClipPlane5 = GL_CLIP_PLANE5,
+        ColorArray = GL_COLOR_ARRAY,
+        ColorMaterial = GL_COLOR_MATERIAL,
+    #ifdef SON8_OPENGL_VERSION_1_5
+    #endif
 #endif
     }; // enum class GetBoolean
+
     enum class GetInteger : GLenum {
         MaxDrawBuffers = GL_MAX_DRAW_BUFFERS,
 #ifdef SON8_OPENGL_VERSION_1_5
         ActiveTexture = GL_ACTIVE_TEXTURE,
         ArrayBufferBinding = GL_ARRAY_BUFFER_BINDING,
+        BlendDstAlpha = GL_BLEND_DST_ALPHA,
+        BlendDstRGB = GL_BLEND_DST_RGB,
+        BlendSrcAlpha = GL_BLEND_SRC_ALPHA,
+        BlendSrcRGB = GL_BLEND_SRC_RGB,
+#endif
+#ifdef SON8_OPENGL_VERSION_2_1
+        BlendEquationAlpha = GL_BLEND_EQUATION_ALPHA,
+        BlendEquationRGB = GL_BLEND_EQUATION_RGB,
+#endif
+#ifdef SON8_OPENGL_VERSION_4_3
+        MaxComputeShaderStorageBlocks = GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS,
 #endif
 #ifndef SON8_OPENGL_PROFILE_CORE
         AccumAlphaBits = GL_ACCUM_ALPHA_BITS,
@@ -158,13 +191,31 @@ namespace son8::opengl::enums
         AlphaTestRef = GL_ALPHA_TEST_REF,
         AttribStackDepth = GL_ATTRIB_STACK_DEPTH,
         AuxBuffers = GL_AUX_BUFFERS,
+        BlendDst = GL_BLEND_DST,
+        BlendSrc = GL_BLEND_SRC,
+        BlueBits = GL_BLUE_BITS,
+        ClientAttribStackDepth = GL_CLIENT_ATTRIB_STACK_DEPTH,
+        ColorArraySize = GL_COLOR_ARRAY_SIZE,
+        ColorArrayStride = GL_COLOR_ARRAY_STRIDE,
+        ColorArrayType = GL_COLOR_ARRAY_TYPE,
+        ColorMaterialFace = GL_COLOR_MATERIAL_FACE,
+        ColorMaterialParameter = GL_COLOR_MATERIAL_PARAMETER,
+    #ifdef SON8_OPENGL_VERSION_1_5
+        BlendEquation = GL_BLEND_EQUATION,
+        ClientActiveTexture = GL_CLIENT_ACTIVE_TEXTURE,
+        ColorArrayBufferBinding = GL_COLOR_ARRAY_BUFFER_BINDING,
+        ColorSum = GL_COLOR_SUM,
+    #endif
 #endif
     }; // enum class GetInteger
+
     enum class GetDouble : GLenum { // same as GetFloat
         PointSize = GL_POINT_SIZE,
 #ifndef SON8_OPENGL_PROFILE_CORE
         AlphaBias = GL_ALPHA_BIAS,
         AlphaScale = GL_ALPHA_SCALE,
+        BlueBias = GL_BLUE_BIAS,
+        BlueScale = GL_BLUE_SCALE,
 #endif
     }; // enum class GetFloat/GetDouble
 
@@ -179,7 +230,13 @@ namespace son8::opengl::enums
 #endif
     }; // enum class GetArray2d
 
+    enum class GetArray4b : GLenum {
+        ColorWritemask = GL_COLOR_WRITEMASK,
+    };
+
     enum class GetArray4d : GLenum {
+        BlendColor = GL_BLEND_COLOR,
+        ColorClearValue = GL_COLOR_CLEAR_VALUE,
 #ifndef SON8_OPENGL_PROFILE_CORE
         AccumClearValue = GL_ACCUM_CLEAR_VALUE,
 #endif
