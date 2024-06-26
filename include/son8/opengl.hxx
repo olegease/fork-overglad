@@ -132,11 +132,18 @@ namespace son8::opengl::enums
         Clockwise = GL_CW,
     }; // enum class Dir
 
-    // enums used in glEnable/glDisable/IsEnabled functions
+    // enums used in glEnable/glDisable functions
     enum class Capability : GLenum {
         Blend = GL_BLEND,
         DepthTest = GL_DEPTH_TEST,
     }; // enum class Capability
+
+    // STATE is/get related
+    enum class Is : GLboolean {
+#ifdef SON8TEMP
+
+#endif
+    };
 
     // enums used in glGet* functions
     enum class GetUnknown : GLenum {
@@ -178,8 +185,23 @@ namespace son8::opengl::enums
         BlendEquationAlpha = GL_BLEND_EQUATION_ALPHA,
         BlendEquationRGB = GL_BLEND_EQUATION_RGB,
 #endif
+#ifdef SON8_OPENGL_VERSION_3_3
+        ContextFlags = GL_CONTEXT_FLAGS,
+#endif
 #ifdef SON8_OPENGL_VERSION_4_3
+        DebugGroupStackDepth = GL_DEBUG_GROUP_STACK_DEPTH,
+        DispatchIndirectBufferBinding = GL_DISPATCH_INDIRECT_BUFFER_BINDING,
+        MaxCombinedComputeUniformComponents = GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS,
+        MaxCombinedShaderStorageBlocks = GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS,
+        MaxDebugGroupStackDepth = GL_MAX_DEBUG_GROUP_STACK_DEPTH,
+        MaxComputeAtomicCounterBuffers = GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS,
+        MaxComputeAtomicCounters = GL_MAX_COMPUTE_ATOMIC_COUNTERS,
         MaxComputeShaderStorageBlocks = GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS,
+        MaxComputeTextureImageUnits = GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS,
+        MaxComputeUniformBlocks = GL_MAX_COMPUTE_UNIFORM_BLOCKS,
+        MaxComputeUniformComponents = GL_MAX_COMPUTE_UNIFORM_COMPONENTS,
+        MaxComputeWorkGroupCount = GL_MAX_COMPUTE_WORK_GROUP_COUNT,
+        MaxComputeWorkGroupInfocations = GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS,
 #endif
 #ifndef SON8_OPENGL_PROFILE_CORE
         AccumAlphaBits = GL_ACCUM_ALPHA_BITS,
