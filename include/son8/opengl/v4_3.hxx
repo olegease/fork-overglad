@@ -19,6 +19,15 @@
 
 namespace son8::opengl
 {
+    // CORE CATEGORY 1: SPECIAL
+    // CORE CATEGORY 2: DRAW
+    // CORE CATEGORY 3: DATA
+    // CORE CATEGORY 4: TEXTURE
+    // CORE CATEGORY 5: SHADER
+    // CORE CATEGORY 6: FRAME
+    // CORE CATEGORY 7: FEEDBACK
+    // CORE CATEGORY 8: STATE
+    // UNCATEGORIZED
     // buffer functions
     // ClearBufferSubData ClearBufferData
     // shader functions
