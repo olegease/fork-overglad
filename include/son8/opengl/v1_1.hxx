@@ -12,7 +12,13 @@
 namespace son8::opengl
 {
     // CORE CATEGORY 1: SPECIAL
+    SON8_OPENGL_VOID Viewport(types::Rect rect = types::Rect{}) { glViewport(rect.lXb.x, rect.lXb.y, rect.wXh.w, rect.wXh.h); }
+    SON8_OPENGL_VOID DepthRange(GLclampd near, GLclampd far) { glDepthRange(near, far); }
     // CORE CATEGORY 2: DRAW
+    SON8_OPENGL_VOID DrawArrays(GLsizei count) { glDrawArrays(static_cast< GLenum >(enums::Draw::Default), 0, count); }
+    SON8_OPENGL_VOID DrawArrays(enums::Draw mode, GLsizei count) { glDrawArrays(static_cast< GLenum >(mode), 0, count); }
+    SON8_OPENGL_DEPR DrawArrays(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR DrawElements(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
     // CORE CATEGORY 3: DATA
     // CORE CATEGORY 4: TEXTURE
     // CORE CATEGORY 5: SHADER
@@ -20,11 +26,11 @@ namespace son8::opengl
     // CORE CATEGORY 7: FEEDBACK
     // CORE CATEGORY 8: STATE
     SON8_OPENGL_AUTO GetError() { auto e = glGetError(); assert(e == GL_NO_ERROR); return static_cast< enums::Error >(e); }
+    SON8_OPENGL_VOID Enable(enums::Capability cap) { glEnable(static_cast< GLenum >(cap)); }
+    SON8_OPENGL_VOID Disable(enums::Capability cap) { glDisable(static_cast< GLenum >(cap)); }
+    SON8_OPENGL_AUTO IsEnabled(enums::Is is) -> bool { return glIsEnabled(static_cast< GLenum >(is)); }
     // UNCATEGORIZED
     // Core essential functions
-    inline void Viewport(types::Rect rect = types::Rect{}) { glViewport(rect.lXb.x, rect.lXb.y, rect.wXh.w, rect.wXh.h); }
-    //inline void Viewport(GLsizei width, GLsizei height) { glViewport(0, 0, width, height); }
-    //inline void Viewport(GLint x, GLint y, GLsizei width, GLsizei height) { glViewport(x, y, width, height); }
     inline void Flush() { glFlush(); }
     inline void Finish() { glFinish(); }
 
@@ -68,11 +74,8 @@ namespace son8::opengl
     // special functions
     // Hint
     // vertex functions
-    inline void DrawArrays(GLsizei count) { glDrawArrays(static_cast< GLenum >(enums::Draw::Default), 0, count); }
-    inline void DrawArrays(enums::Draw mode, GLsizei count) { glDrawArrays(static_cast< GLenum >(mode), 0, count); }
     // DrawElements
     // get functions
-    inline auto IsEnabled(enums::Capability cap) -> bool { return glIsEnabled(static_cast< GLenum >(cap)); }
     inline auto Get(enums::GetBoolean name) { GLboolean v; glGetBooleanv(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetInteger name) { GLint v; glGetIntegerv(static_cast< GLenum >(name), &v); return v; }
     // inline auto Get(enums::GetFloat name) { GLfloat v; glGetFloatv(static_cast< GLenum >(name), &v); return v; }
@@ -87,13 +90,60 @@ namespace son8::opengl
     // compatibility functions
 #ifndef  SON8_OPENGL_PROFILE_CORE
     // COMPATIBILITY CATEGORY 1: SPECIAL
+    SON8_OPENGL_VOID PushMatrix() { glPushMatrix(); }
+    SON8_OPENGL_VOID PopMatrix() { glPopMatrix(); }
+    SON8_OPENGL_VOID MatrixMode(enums::Matrix mode) { glMatrixMode(static_cast< GLenum >(mode)); }
+    SON8_OPENGL_VOID LoadIdentity(types::array16f const &m) { glLoadIdentity(); }
+    SON8_OPENGL_VOID LoadMatrix(types::array16f const &m) { glLoadMatrixf(m.data()); }
+    SON8_OPENGL_VOID LoadMatrix(types::array16d const &m) { glLoadMatrixd(m.data()); }
+    SON8_OPENGL_VOID MultMatrix(types::array16f const &m) { glMultMatrixf(m.data()); }
+    SON8_OPENGL_VOID MultMatrix(types::array16d const &m) { glMultMatrixd(m.data()); }
+    SON8_OPENGL_VOID Scale(GLfloat x, GLfloat y, GLfloat z) { glScalef(x, y, z); }
+    SON8_OPENGL_VOID Scale(GLdouble x, GLdouble y, GLdouble z) { glScaled(x, y, z); }
+    SON8_OPENGL_VOID Translate(GLfloat x, GLfloat y, GLfloat z) { glTranslatef(x, y, z); }
+    SON8_OPENGL_VOID Translate(GLdouble x, GLdouble y, GLdouble z) { glTranslated(x, y, z); }
+    SON8_OPENGL_VOID Rotate(GLfloat degrees, GLfloat x, GLfloat y, GLfloat z) { glRotatef(degrees, x, y, z); }
+    SON8_OPENGL_VOID Rotate(GLdouble degrees, GLdouble x, GLdouble y, GLdouble z) { glRotated(degrees, x, y, z); }
+    SON8_OPENGL_DEPR Ortho(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR Frustum(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_VOID ClipPlane(enums::Clip plane, types::array4d const &equation) { glClipPlane(static_cast< GLenum >(plane), equation.data()); }
     // COMPATIBILITY CATEGORY 2: DRAW
-    //     Begin/End paradigm
+    //      list paradigm
+    SON8_OPENGL_DEPR CallList(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    //      vertex pointer paragigm
+    SON8_OPENGL_VOID ArrayElement(GLint i) { glArrayElement(i); }
+    SON8_OPENGL_VOID EnableClientState(enums::Array array) { glEnableClientState(static_cast< GLenum >(array)); }
+    SON8_OPENGL_VOID DisableClientState(enums::Array array) { glDisableClientState(static_cast< GLenum >(array)); }
+    //      Begin/End paradigm
     SON8_OPENGL_VOID Begin() { glBegin(static_cast< GLenum >(enums::Draw::Default)); }
     SON8_OPENGL_VOID Begin(enums::Draw mode) { glBegin(static_cast< GLenum >(mode)); }
     SON8_OPENGL_VOID End() { glEnd(); }
-    SON8_OPENGL_VOID EdgeFlag(GLboolean flag) { glEdgeFlag(flag); }
-    SON8_OPENGL_VOID EdgeFlag(types::array1bool const &flag) { glEdgeFlagv(flag.data()); }
+    SON8_OPENGL_VOID Index(GLint index) { glIndexi(index); }
+    SON8_OPENGL_VOID Index(GLshort index) { glIndexs(index); }
+    SON8_OPENGL_VOID Index(GLfloat index) { glIndexf(index); }
+    SON8_OPENGL_VOID Index(GLubyte index) { glIndexub(index); }
+    SON8_OPENGL_VOID Index(GLdouble index) { glIndexd(index); }
+    SON8_OPENGL_VOID Index(types::array1s const &index) { glIndexsv(index.data()); }
+    SON8_OPENGL_VOID Index(types::array1i const &index) { glIndexiv(index.data()); }
+    SON8_OPENGL_VOID Index(types::array1f const &index) { glIndexfv(index.data()); }
+    SON8_OPENGL_VOID Index(types::array1d const &index) { glIndexdv(index.data()); }
+    SON8_OPENGL_VOID Index(types::array1ub const &index) { glIndexubv(index.data()); }
+    SON8_OPENGL_VOID Color(GLint r, GLint g, GLint b, GLint a) { glColor4i(r, g, b, a); }
+    SON8_OPENGL_VOID Color(GLbyte r, GLbyte g, GLbyte b, GLbyte a) { glColor4b(r, g, b, a); }
+    SON8_OPENGL_VOID Color(GLuint r, GLuint g, GLuint b, GLuint a) { glColor4ui(r, g, b, a); }
+    SON8_OPENGL_VOID Color(GLshort r, GLshort g, GLshort b, GLshort a) { glColor4s(r, g, b, a); }
+    SON8_OPENGL_VOID Color(GLfloat r, GLfloat g, GLfloat b, GLfloat a) { glColor4f(r, g, b, a); }
+    SON8_OPENGL_VOID Color(GLubyte r, GLubyte g, GLubyte b, GLubyte a) { glColor4ub(r, g, b, a); }
+    SON8_OPENGL_VOID Color(GLdouble r, GLdouble g, GLdouble b, GLdouble a) { glColor4d(r, g, b, a); }
+    SON8_OPENGL_VOID Color(GLushort r, GLushort g, GLushort b, GLushort a) { glColor4us(r, g, b, a); }
+    SON8_OPENGL_VOID Color(types::array4b const &components) { glColor4bv(components.data()); }
+    SON8_OPENGL_VOID Color(types::array4s const &components) { glColor4sv(components.data()); }
+    SON8_OPENGL_VOID Color(types::array4i const &components) { glColor4iv(components.data()); }
+    SON8_OPENGL_VOID Color(types::array4f const &components) { glColor4fv(components.data()); }
+    SON8_OPENGL_VOID Color(types::array4d const &components) { glColor4dv(components.data()); }
+    SON8_OPENGL_VOID Color(types::array4ub const &components) { glColor4ubv(components.data()); }
+    SON8_OPENGL_VOID Color(types::array4us const &components) { glColor4usv(components.data()); }
+    SON8_OPENGL_VOID Color(types::array4ui const &components) { glColor4uiv(components.data()); }
     SON8_OPENGL_VOID Vertex(GLint x, GLint y) { glVertex2i(x, y); }
     SON8_OPENGL_VOID Vertex(GLshort x, GLshort y) { glVertex2s(x, y); }
     SON8_OPENGL_VOID Vertex(GLfloat x, GLfloat y) { glVertex2f(x, y); }
@@ -118,6 +168,16 @@ namespace son8::opengl
     SON8_OPENGL_VOID Vertex(types::array4i const &coords) { glVertex4iv(coords.data()); }
     SON8_OPENGL_VOID Vertex(types::array4f const &coords) { glVertex4fv(coords.data()); }
     SON8_OPENGL_VOID Vertex(types::array4d const &coords) { glVertex4dv(coords.data()); }
+    SON8_OPENGL_VOID Normal(GLint x, GLint y, GLint z) {  glNormal3i(x, y, z); }
+    SON8_OPENGL_VOID Normal(GLbyte x, GLbyte y, GLbyte z) {  glNormal3b(x, y, z); }
+    SON8_OPENGL_VOID Normal(GLshort x, GLshort y, GLshort z) {  glNormal3s(x, y, z); }
+    SON8_OPENGL_VOID Normal(GLfloat x, GLfloat y, GLfloat z) {  glNormal3f(x, y, z); }
+    SON8_OPENGL_VOID Normal(GLdouble x, GLdouble y, GLdouble z) {  glNormal3d(x, y, z); }
+    SON8_OPENGL_VOID Normal(types::array3b const &coords) { glNormal3bv(coords.data()); }
+    SON8_OPENGL_VOID Normal(types::array3s const &coords) { glNormal3sv(coords.data()); }
+    SON8_OPENGL_VOID Normal(types::array3i const &coords) { glNormal3iv(coords.data()); }
+    SON8_OPENGL_VOID Normal(types::array3f const &coords) { glNormal3fv(coords.data()); }
+    SON8_OPENGL_VOID Normal(types::array3d const &coords) { glNormal3dv(coords.data()); }
     SON8_OPENGL_VOID TexCoord(GLint s) { glTexCoord1i(s); }
     SON8_OPENGL_VOID TexCoord(GLshort s) { glTexCoord1s(s); }
     SON8_OPENGL_VOID TexCoord(GLfloat s) { glTexCoord1f(s); }
@@ -150,29 +210,33 @@ namespace son8::opengl
     SON8_OPENGL_VOID TexCoord(types::array4i const &coords) { glTexCoord4iv(coords.data()); }
     SON8_OPENGL_VOID TexCoord(types::array4f const &coords) { glTexCoord4fv(coords.data()); }
     SON8_OPENGL_VOID TexCoord(types::array4d const &coords) { glTexCoord4dv(coords.data()); }
-
+    SON8_OPENGL_VOID EdgeFlag(GLboolean flag) { glEdgeFlag(flag); }
+    SON8_OPENGL_VOID EdgeFlag(types::array1bool const &flag) { glEdgeFlagv(flag.data()); }
+    SON8_OPENGL_VOID Rect(GLint x1, GLint y1, GLint x2, GLint y2) { glRecti(x1, y1, x2, y2); }
+    SON8_OPENGL_VOID Rect(GLshort x1, GLshort y1, GLshort x2, GLshort y2) { glRects(x1, y1, x2, y2); }
+    SON8_OPENGL_VOID Rect(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2) { glRectf(x1, y1, x2, y2); }
+    SON8_OPENGL_VOID Rect(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2) { glRectd(x1, y1, x2, y2); }
+    SON8_OPENGL_VOID Rect(types::array2s const &v1, types::array2s const &v2) { glRectsv(v1.data(), v2.data()); }
+    SON8_OPENGL_VOID Rect(types::array2i const &v1, types::array2i const &v2) { glRectiv(v1.data(), v2.data()); }
+    SON8_OPENGL_VOID Rect(types::array2f const &v1, types::array2f const &v2) { glRectfv(v1.data(), v2.data()); }
+    SON8_OPENGL_VOID Rect(types::array2d const &v1, types::array2d const &v2) { glRectdv(v1.data(), v2.data()); }
     // COMPATIBILITY CATEGORY 3: DATA
+    SON8_OPENGL_DEPR IndexPointer(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR ColorPointer(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR VertexPointer(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR NormalPointer(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR TexCoordPointer(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR EdgeFlagPointer(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
+    SON8_OPENGL_DEPR InterleavedArrays(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
     // COMPATIBILITY CATEGORY 4: TEXTURE
+    // TexGen
+    SON8_OPENGL_DEPR TexGen(...) { assert(SON8_OPENGL_NOT_IMPLEMENTED); }
     // COMPATIBILITY CATEGORY 5: SHADER
     // COMPATIBILITY CATEGORY 6: FRAME
     // COMPATIBILITY CATEGORY 7: FEEDBACK
     // COMPATIBILITY CATEGORY 8: STATE
+
     // UNCATEGORIZED
-    // matrix functions
-    // MatrixMode, LoadMatrix, MultMatrix, LoadIdentity, Rotate, Translate, Scale, Frustum, Ortho, PushMatrix, PopMatrix
-    //   vertex functions
-    //     Array Pointers paradigm
-    inline void EnableClientState(enums::Array array) { glEnableClientState(static_cast< GLenum >(array)); }
-    inline void DisableClientState(enums::Array array) { glDisableClientState(static_cast< GLenum >(array)); }
-
-    // EdgeFlagPointer, TexCoordPointer, NormalPointer, ColorPointer, IndexPointer VertexPointer
-    // ArrayElement
-    // InterleavedArrays
-
-    // EdgeFlag TexCoord Normal Color Index
-    // Rect
-    // TexGen
-    // ClipPlane
     // RasterPos
     // LineStipple
     // PolygonStipple

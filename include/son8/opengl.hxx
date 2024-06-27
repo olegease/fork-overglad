@@ -29,8 +29,10 @@
 # define SON8_OPENGL_VERSION 0x0406CE
 #  endif        //SON8_OPENGL_DEFINED
 
-#define SON8_OPENGL_AUTO [[nodiscard]] inline auto
 #define SON8_OPENGL_VOID inline void
+#define SON8_OPENGL_AUTO [[nodiscard]] inline auto
+#define SON8_OPENGL_DEPR [[deprecated]] inline void // temporary not implemented
+#define SON8_OPENGL_NOT_IMPLEMENTED 0
 
 namespace son8::opengl::types
 {
@@ -45,10 +47,10 @@ namespace son8::opengl::types
     using Buffer = GenTid< 2 >;
 
     using array1i = std::array< GLint, 1 >;
+    using array1b = std::array< GLbyte, 1 >;
     using array1s = std::array< GLshort, 1 >;
     using array1f = std::array< GLfloat, 1 >;
     using array1d = std::array< GLdouble, 1 >;
-    using array1bool = std::array< GLboolean, 1 >;
 
     using array2i = std::array< GLint, 2 >;
     using array2s = std::array< GLshort, 2 >;
@@ -56,18 +58,32 @@ namespace son8::opengl::types
     using array2d = std::array< GLdouble, 2 >;
 
     using array3i = std::array< GLint, 3 >;
-    using array3b = std::array< GLbyte, 3 >
+    using array3b = std::array< GLbyte, 3 >;
     using array3s = std::array< GLshort, 3 >;
     using array3f = std::array< GLfloat, 3 >;
     using array3d = std::array< GLdouble, 3 >;
 
     using array4i = std::array< GLint, 4 >;
+    using array4b = std::array< GLbyte, 4 >;
     using array4s = std::array< GLshort, 4 >;
     using array4f = std::array< GLfloat, 4 >;
     using array4d = std::array< GLdouble, 4 >;
-    using array4bool = std::array< GLboolean, 4 >;
 
+    using array1ub = std::array< GLubyte, 1 >;
+
+    using array3ui = std::array< GLuint, 3 >;
+    using array3ub = std::array< GLubyte, 3 >;
+    using array3us = std::array< GLushort, 3 >;
+
+    using array4ui = std::array< GLuint, 4 >;
+    using array4ub = std::array< GLubyte, 4 >;
+    using array4us = std::array< GLushort, 4 >;
+
+    using array16f = std::array< GLfloat, 16 >;
     using array16d = std::array< GLdouble, 16 >;
+
+    using array1bool = std::array< GLboolean, 1 >;
+    using array4bool = std::array< GLboolean, 4 >;
 
     struct Rect {
         struct Point { GLint x; GLint y; };
@@ -320,13 +336,28 @@ namespace son8::opengl::enums
 
 #ifndef  SON8_OPENGL_PROFILE_CORE
     enum class Array : GLenum {
-        Vertex = GL_VERTEX_ARRAY,
-        Normal = GL_NORMAL_ARRAY,
         Color = GL_COLOR_ARRAY,
         Index = GL_INDEX_ARRAY,
-        Texture = GL_TEXTURE_COORD_ARRAY,
+        Vertex = GL_VERTEX_ARRAY,
+        Normal = GL_NORMAL_ARRAY,
         Edge = GL_EDGE_FLAG_ARRAY,
+        Texture = GL_TEXTURE_COORD_ARRAY,
     };
+
+    enum class Matrix : GLenum {
+        Texture = GL_TEXTURE,
+        Modelview = GL_MODELVIEW,
+        Projection = GL_PROJECTION,
+    }; // enum class Matrix
+
+    enum class Clip : GLenum {
+        Plane0 = GL_CLIP_PLANE0,
+        Plane1 = GL_CLIP_PLANE1,
+        Plane2 = GL_CLIP_PLANE2,
+        Plane3 = GL_CLIP_PLANE3,
+        Plane4 = GL_CLIP_PLANE4,
+        Plane5 = GL_CLIP_PLANE5,
+    }; // enum class Clip
 # endif//SON8_OPENGL_PROFILE_CORE
 }// namespace son8::opengl::enums
 
