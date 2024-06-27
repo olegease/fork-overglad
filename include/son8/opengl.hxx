@@ -48,7 +48,7 @@ namespace son8::opengl::types
     using array1s = std::array< GLshort, 1 >;
     using array1f = std::array< GLfloat, 1 >;
     using array1d = std::array< GLdouble, 1 >;
-    using array1b = std::array< GLboolean, 1 >;
+    using array1bool = std::array< GLboolean, 1 >;
 
     using array2i = std::array< GLint, 2 >;
     using array2s = std::array< GLshort, 2 >;
@@ -56,6 +56,7 @@ namespace son8::opengl::types
     using array2d = std::array< GLdouble, 2 >;
 
     using array3i = std::array< GLint, 3 >;
+    using array3b = std::array< GLbyte, 3 >
     using array3s = std::array< GLshort, 3 >;
     using array3f = std::array< GLfloat, 3 >;
     using array3d = std::array< GLdouble, 3 >;
@@ -64,7 +65,7 @@ namespace son8::opengl::types
     using array4s = std::array< GLshort, 4 >;
     using array4f = std::array< GLfloat, 4 >;
     using array4d = std::array< GLdouble, 4 >;
-    using array4b = std::array< GLboolean, 4 >;
+    using array4bool = std::array< GLboolean, 4 >;
 
     using array16d = std::array< GLdouble, 16 >;
 
@@ -279,7 +280,7 @@ namespace son8::opengl::enums
 #endif
     }; // enum class GetArray2d
 
-    enum class GetArray4b : GLenum {
+    enum class GetArray4bool : GLenum {
         ColorWritemask = GL_COLOR_WRITEMASK,
     };
 

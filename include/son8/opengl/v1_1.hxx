@@ -78,8 +78,8 @@ namespace son8::opengl
     // inline auto Get(enums::GetFloat name) { GLfloat v; glGetFloatv(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetDouble name) { GLdouble v; glGetDoublev(static_cast< GLenum >(name), &v); return v; }
     inline auto Get(enums::GetArray2d name) { types::array2d v; glGetDoublev(static_cast< GLenum >(name), v.data()); return v; }
-    inline auto Get(enums::GetArray4b name) { types::array4b v; glGetBooleanv(static_cast< GLenum >(name), v.data()); return v; }
     inline auto Get(enums::GetArray4d name) { types::array4d v; glGetDoublev(static_cast< GLenum >(name), v.data()); return v; }
+    inline auto Get(enums::GetArray4bool name) { types::array4bool v; glGetBooleanv(static_cast< GLenum >(name), v.data()); return v; }
     // GetTexImage
     // IsTexture
     // GetPointerv
@@ -93,7 +93,7 @@ namespace son8::opengl
     SON8_OPENGL_VOID Begin(enums::Draw mode) { glBegin(static_cast< GLenum >(mode)); }
     SON8_OPENGL_VOID End() { glEnd(); }
     SON8_OPENGL_VOID EdgeFlag(GLboolean flag) { glEdgeFlag(flag); }
-    SON8_OPENGL_VOID EdgeFlag(types::array1b const &flag) { glEdgeFlagv(flag.data()); }
+    SON8_OPENGL_VOID EdgeFlag(types::array1bool const &flag) { glEdgeFlagv(flag.data()); }
     SON8_OPENGL_VOID Vertex(GLint x, GLint y) { glVertex2i(x, y); }
     SON8_OPENGL_VOID Vertex(GLshort x, GLshort y) { glVertex2s(x, y); }
     SON8_OPENGL_VOID Vertex(GLfloat x, GLfloat y) { glVertex2f(x, y); }
