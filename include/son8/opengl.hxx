@@ -1,6 +1,16 @@
 #pragma once
 // RULES:
 // - only call c language gl functions inside inlined functions definitions
+// - no c pointers
+// EIGHT CATEFORIES: (in progress)
+// 1. SPECIAL: functions that not belong to any other category (e.g. Viewport, Flush and Finish)
+// 2. DRAW: functions that commands to draw vertices into framebuffer (e.g. CallList, DrawArrays, Vertex3f)
+// 3. DATA: functions that operate/store on vertices data (e.g. GenBuffers, BufferData, VertexPointer, NewList)
+// 4. TEXTURE: functions that operate/store on texture data (e.g. GenTextures, TexImage2D, TexParameteri, TexEnv)
+// 5. SHADER: functions that operate/store on shader data or are replaced by it (e.g. CreateShader, LightModel, Material)
+// 6. FRAME: functions that operate/store on framebuffer data (e.g. GenFramebuffers, FramebufferTexture, FramebufferRenderbuffer)
+// 7. FEEDBACK: functions that operate/store on feedback data (e.g. BeginFeedback, EndFeedback, PassThrough)
+// 8. STATE: functions that operate on state of opengl (e.g. Enable, Disable, IsEnabled, GetBoolean, GetInteger)
 #include <glad/gl.h>
 #include <cassert>
 #include <array>
@@ -19,6 +29,9 @@
 # define SON8_OPENGL_VERSION 0x0406CE
 #  endif        //SON8_OPENGL_DEFINED
 
+#define SON8_OPENGL_AUTO [[nodiscard]] inline auto
+#define SON8_OPENGL_VOID inline void
+
 namespace son8::opengl::types
 {
     template< unsigned id >
@@ -31,13 +44,28 @@ namespace son8::opengl::types
     using List = GenTid< 1 >;
     using Buffer = GenTid< 2 >;
 
+    using array1i = std::array< GLint, 1 >;
+    using array1s = std::array< GLshort, 1 >;
+    using array1f = std::array< GLfloat, 1 >;
+    using array1d = std::array< GLdouble, 1 >;
+    using array1bool = std::array< GLboolean, 1 >;
+
     using array2i = std::array< GLint, 2 >;
     using array2s = std::array< GLshort, 2 >;
     using array2f = std::array< GLfloat, 2 >;
     using array2d = std::array< GLdouble, 2 >;
 
-    using array4b = std::array< GLboolean, 4 >;
+    using array3i = std::array< GLint, 3 >;
+    using array3b = std::array< GLbyte, 3 >
+    using array3s = std::array< GLshort, 3 >;
+    using array3f = std::array< GLfloat, 3 >;
+    using array3d = std::array< GLdouble, 3 >;
+
+    using array4i = std::array< GLint, 4 >;
+    using array4s = std::array< GLshort, 4 >;
+    using array4f = std::array< GLfloat, 4 >;
     using array4d = std::array< GLdouble, 4 >;
+    using array4bool = std::array< GLboolean, 4 >;
 
     using array16d = std::array< GLdouble, 16 >;
 
@@ -47,7 +75,7 @@ namespace son8::opengl::types
         Point lXb;
         Size wXh;
         Rect() noexcept: lXb({0, 0}), wXh({640, 480}) { }
-        Rect(Rect::Size widthXHeight) noexcept: lXb({0, 0}), wXh(widthXHeight) { }
+        Rect(Rect::Size widthXheight) noexcept: lXb({0, 0}), wXh(widthXheight) { }
         Rect(Rect::Point leftXbottom, Rect::Size widthXheight) noexcept: lXb(leftXbottom), wXh(widthXheight) { }
     };
 
@@ -252,7 +280,7 @@ namespace son8::opengl::enums
 #endif
     }; // enum class GetArray2d
 
-    enum class GetArray4b : GLenum {
+    enum class GetArray4bool : GLenum {
         ColorWritemask = GL_COLOR_WRITEMASK,
     };
 
@@ -312,6 +340,15 @@ namespace son8::opengl::enums
 // opengl 4.4, 4.5 and 4.6 functionality
 # ifdef SON8_OPENGL_VERSION_4_6 // !important: if client include v4_6cb.hxx
 namespace son8::opengl {
+    // CORE CATEGORY 1: SPECIAL
+    // CORE CATEGORY 2: DRAW
+    // CORE CATEGORY 3: DATA
+    // CORE CATEGORY 4: TEXTURE
+    // CORE CATEGORY 5: SHADER
+    // CORE CATEGORY 6: FRAME
+    // CORE CATEGORY 7: FEEDBACK
+    // CORE CATEGORY 8: STATE
+    // UNCATEGORIZED
     inline auto GetGraphicsResetStatus() { return static_cast< enums::Reset >(glGetGraphicsResetStatus()); }
     // CreateQueries
     // GetQueryBufferObjectiv*
